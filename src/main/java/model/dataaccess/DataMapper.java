@@ -81,6 +81,18 @@ public class DataMapper {
             e.printStackTrace();
         }
     }
+    
+        public void addPlade(String pladenavn, int indspillet_year){
+        try {
+            PreparedStatement pstmt = getConnection().prepareStatement(ADD_PLADE);
+            pstmt.setString(1,pladenavn);
+            pstmt.setInt(2,indspillet_year);
+            pstmt.executeUpdate(); // her bruges executeUpdate istedet for executeQuery (det gælder ved update, create og delete operationer).
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+        
     public static void main(String[] args) {
         //new DataMapper().getAllKunstner().forEach((kunstner)->{System.out.println("kunstner: "+kunstner);});
     }

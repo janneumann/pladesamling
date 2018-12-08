@@ -6,20 +6,21 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.dataaccess.DataMapper;
+import model.dataaccess.DataFacade;
 
 /**
  *
  * @author JNE
  */
-@WebServlet(name = "FrontControl", urlPatterns = {"/FrontControl"})
-public class FrontControl extends HttpServlet {
-    DataMapper dm = new DataMapper();
+@WebServlet(name = "Login", urlPatterns = {"/Login", "/index.html"})
+public class Login extends HttpServlet {
+    DataFacade df = new DataFacade();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,37 +32,19 @@ public class FrontControl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String origin = request.getParameter("origin");
-        String valg = request.getParameter("valg");
-        if(origin == null || valg == null){
+          response.setContentType("text/html;charset=UTF-8");
+        if(request.getParameter("username")==null)
+            response.sendRedirect("login.jsp");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        if(df.authenticate(username, password)){
+            request.setAttribute("user", df.getUserFromName(username));
             request.getRequestDispatcher("menu.jsp").forward(request, response);
-        }
-        
-        switch (origin) {
-            case "menu": //Vi kom fra menu.jsp
-                switch (valg){
-                    case "list_plader":
-                    request.setAttribute("allplader", dm.getAllPlader()); //data mapper klassen bruges til at køre GET_ALL_PLADER() som returnerer en liste af users som sættes fast på request objektet og sendes til viewet: showplader.jsp
-                    request.getRequestDispatcher("showplader.jsp").forward(request, response);
-                    break;
-                    case "list_kunstner":
-                    request.setAttribute("allkunstner", dm.getAllKunstner()); //data mapper klassen bruges til at køre GET_ALL_KUNSTNER() som returnerer en liste af users som sættes fast på request objektet og sendes til viewet: showkunster.jsp
-                    request.getRequestDispatcher("showkunstner.jsp").forward(request, response);
-                    break;
-                   
-                default:
-                throw new AssertionError();
-                }
-                break;
-            case "createkunstner": //vi kom fra createkunstner.jsp
-                String input = request.getParameter("kunstner_navn");
-                String input2 = request.getParameter("country");
-                dm.addKunstner(input, input2);
-                System.out.println(input + input2);
-                break;
-            default:
-                throw new AssertionError();
+            
+        } else {
+            PrintWriter out = response.getWriter();
+            out.println("Unfortunately you could not be authenticated");
+            out.close();
         }
     }
 

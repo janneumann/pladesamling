@@ -1,5 +1,10 @@
+model\dataaccess\DataFacadeIF.class
+model\dataaccess\DataFacade.class
+model\dataaccess\DataMapper.class
+logic\User.class
+model\dataaccess\UserMapper.class
 logic\Kunstner.class
 model\dataaccess\DB.class
 control\FrontControl.class
 logic\Plade.class
-model\dataaccess\DataMapper.class
+control\Login.class

@@ -4,6 +4,7 @@
     Author     : JNE
 --%>
 
+<%@page import="logic.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -13,13 +14,14 @@
     </head>
     <body>
 
-        <!--        <form action="FrontControl" method="post">
-                    <h1>Vælg det ønskede menupunkt</h1><br>
-                    <input type="radio" name="valg" value="list_plader">Liste over plader
-                    <input type="radio" name="valg" value="list_kustner">Liste over kunstnere<br>
-                    
-                    <input type="submit" value="submit"><br>
-                </form>-->
+     <% if (request.getAttribute("user") == null) { %>
+     Du skal først logge ind <a <div>href</div>="login.jsp">Gå til login siden</a>
+     <% } else {
+     User user = (User) request.getAttribute("user");
+     %>
+
+      //  <%@include file="navbar.jsp"%>
+        
         <h2>Her kan du vælge mellem forskellige visninger</h2>
         <a href="FrontControl?origin=menu&valg=list_plader">Se alle plader</a><br/>
         <a href="FrontControl?origin=menu&valg=list_kunstner">Se alle kunstnere</a><br>
