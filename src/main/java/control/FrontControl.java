@@ -49,12 +49,17 @@ public class FrontControl extends HttpServlet {
                     request.setAttribute("allkunstner", dm.getAllKunstner()); //data mapper klassen bruges til at køre GET_ALL_KUNSTNER() som returnerer en liste af users som sættes fast på request objektet og sendes til viewet: showkunster.jsp
                     request.getRequestDispatcher("showkunstner.jsp").forward(request, response);
                     break;
-                    
+                   
                 default:
                 throw new AssertionError();
                 }
+                break;
             case "createkunstner": //vi kom fra createkunstner.jsp
-                
+                String input = request.getParameter("kunstner_navn");
+                String input2 = request.getParameter("country");
+                dm.addKunstner(input, input2);
+                System.out.println(input + input2);
+                break;
             default:
                 throw new AssertionError();
         }

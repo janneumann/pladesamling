@@ -1,0 +1,5 @@
+logic\Kunstner.class
+model\dataaccess\DB.class
+control\FrontControl.class
+logic\Plade.class
+model\dataaccess\DataMapper.class

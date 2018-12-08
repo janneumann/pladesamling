@@ -24,7 +24,7 @@ public class DataMapper {
     private static final String GET_ALL_PLADER = "SELECT id, pladenavn, indspillet_year FROM plade";
     private static final String GET_ALL_KUNSTNER = "SELECT idkunstner, kunstner_navn, country FROM kunstner";
     private static final String ADD_PLADE = "INSERT INTO pladesamling.plade (pladenavn, indspillet_year) VALUES (?,?)";
-    private static final String ADD_KUNSTNER = "INSERT INTO pladesamling.kunstner (kunstnernavn, country) VALUES (?,?)";
+    private static final String ADD_KUNSTNER = "INSERT INTO pladesamling.kunstner (kunstner_navn, country) VALUES (?,?)";
     private static final String DELETE_KUNSTNER = "DELETE FROM pladesamling.kunstner WHERE id = ?";
 
     public List<Plade> getAllPlader() {
@@ -76,13 +76,13 @@ public class DataMapper {
             PreparedStatement pstmt = getConnection().prepareStatement(ADD_KUNSTNER);
             pstmt.setString(1,kunstner_navn);
             pstmt.setString(2,country);
-            pstmt.executeQuery(); // her bruges executeUpdate istedet for executeQuery (det gælder ved update, create og delete operationer).
+            pstmt.executeUpdate(); // her bruges executeUpdate istedet for executeQuery (det gælder ved update, create og delete operationer).
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
     public static void main(String[] args) {
-        new DataMapper().getAllKunstner().forEach((kunstner)->{System.out.println("kunstner: "+kunstner);});
+        //new DataMapper().getAllKunstner().forEach((kunstner)->{System.out.println("kunstner: "+kunstner);});
     }
 
 }
