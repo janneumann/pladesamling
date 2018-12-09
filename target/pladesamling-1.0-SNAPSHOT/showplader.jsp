@@ -19,6 +19,7 @@
                 out.println(pl.getPladenavn()+" "+pl.getIndspillet_year()+"<br/>");
             }
         %>
-    
+    <br/>
+        <a href="menu.jsp">Tilbage til Menu</a>
     </body>
 </html>

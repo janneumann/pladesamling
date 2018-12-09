@@ -19,6 +19,7 @@
                 out.println(k.getKunsternavn()+ " "+k.getCountry()+"<br/>");
             }
         %>
-        
+        <br/>
+        <a href="menu.jsp">Tilbage til Menu</a>
     </body>
 </html>
