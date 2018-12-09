@@ -82,7 +82,7 @@ public class DataMapper {
         }
     }
     
-        public void addPlade(String pladenavn, int indspillet_year){
+    public void addPlade(String pladenavn, int indspillet_year){
         try {
             PreparedStatement pstmt = getConnection().prepareStatement(ADD_PLADE);
             pstmt.setString(1,pladenavn);

@@ -18,8 +18,9 @@
      Du skal først logge ind <a <div>href</div>="login.jsp">Gå til login siden</a>
      <% } else {
      User user = (User) request.getAttribute("user");
-     %>
-
+    }
+    %>
+    
       //  <%@include file="navbar.jsp"%>
         
         <h2>Her kan du vælge mellem forskellige visninger</h2>
